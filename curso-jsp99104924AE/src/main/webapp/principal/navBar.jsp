@@ -73,7 +73,7 @@
                                   </li>
                                   <li class="waves-effect waves-light">
                                       <div class="media">
-                                          <!--   <img class="d-flex align-self-center img-radius" src="<%= request.getContextPath() %>/assets/images/nelson.jpg" alt="Generic placeholder image"> -->
+                                          <!--   <img class="d-flex align-self-center img-radius" src="<%= request.getContextPath() %>/assets/images/user.jpg" alt="Generic placeholder image"> -->
                                           <div class="media-body">
                                               <h5 align="center" class="notification-user">PROVÉRBIOS 3.7</h5>
                                               <p align="center" class="notification-msg">Não Seja sábios aos teus próprios olhos tema ao SENHOR e aparta-te do mal</p>
