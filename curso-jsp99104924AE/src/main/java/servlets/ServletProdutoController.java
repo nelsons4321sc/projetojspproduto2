@@ -62,7 +62,9 @@ public class ServletProdutoController extends ServleGenericUtil {
 				//linha que preenche os campos após a exclusão
 				modelLogin = daoUsuarioRepository.consultarUsuarioID(Long.parseLong(id));
 				
-				List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(Long.parseLong(id)); 
+				//List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(Long.parseLong(id)); 
+				
+				List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(super.getUserLogado(request));
 				
 				request.setAttribute("modelProdutos", modelProdutos);
 				request.setAttribute("msg", "Produto excluído");
@@ -104,7 +106,8 @@ public class ServletProdutoController extends ServleGenericUtil {
 				//ModelProduto modelProduto = daoProdutoRepository.consultarProdutoID(id, super.getUserLogado(request));
 				ModelProduto modelProduto = daoProdutoRepository.consultarProdutoID(id);
 				
-			    List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(modelLogin.getId());
+			    //List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(modelLogin.getId());
+				List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(super.getUserLogado(request));
 			   // List<ModelProduto> modelProdutos = daoProdutoRepository.listTodosProduto(modelLogin.getId());
 				
 				
@@ -194,7 +197,7 @@ public class ServletProdutoController extends ServleGenericUtil {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String usuario_pai_id = request.getParameter("id");
+		//String usuario_pai_id = request.getParameter("id");
 	
 		try {
 			// os dois ids estão aparecendo o usuário que cadastrou e não aparece o id do produto
