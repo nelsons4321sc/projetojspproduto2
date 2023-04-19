@@ -15,10 +15,6 @@ public class ModelLogin implements Serializable{
 	private String senha;
 	private Boolean userAdmin;
 	
-	//private String perfil;
-	
-	//private String sexo;
-	
 	private String fotouser;
 	
 	private String extensaofotouser;
