@@ -104,8 +104,8 @@ public class ServletProdutoController extends ServleGenericUtil {
 				//ModelProduto modelProduto = daoProdutoRepository.consultarProdutoID(id, super.getUserLogado(request));
 				ModelProduto modelProduto = daoProdutoRepository.consultarProdutoID(id);
 				
-			   // List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(modelLogin.getId());
-			    List<ModelProduto> modelProdutos = daoProdutoRepository.listTodosProduto(modelLogin.getId());
+			    List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(modelLogin.getId());
+			   // List<ModelProduto> modelProdutos = daoProdutoRepository.listTodosProduto(modelLogin.getId());
 				
 				
 				request.setAttribute("modelProdutos", modelProdutos);
