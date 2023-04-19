@@ -131,9 +131,29 @@ public class ServletProdutoController extends ServleGenericUtil {
 				request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
 				request.getRequestDispatcher("principal/formProduto.jsp").forward(request, response); 
 			}
+			
+			 if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarTabProduto")) {	
+				
+				List<ModelProduto> modelProdutos = daoProdutoRepository.listTodosProduto(modelLogin.getId());
+				
+				request.setAttribute("msg", "Produtos carregados");
+				request.setAttribute("modelProdutos", modelProdutos);
+				request.setAttribute("totalPagina", daoProdutoRepository.totalPagina(this.getUserLogado(request)));
+				request.getRequestDispatcher("principal/tabelaProduto.jsp").forward(request, response);
+		}
 			 
 	       // int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-			
+			 if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("paginar")) {
+				 
+				 Integer offset = Integer.parseInt(request.getParameter("pagina"));
+				 
+				 List<ModelProduto> modelProdutos = daoProdutoRepository.consultaProdutoListPaginada(this.getUserLogado(request), offset);
+				 
+				 request.setAttribute("modelProdutos", modelProdutos);
+			     request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
+				 request.getRequestDispatcher("principal/tabelaUsuario.jsp").forward(request, response);
+				 
+			 }	
 			 
 			
 			String idUserA = Long.toString(idUser);

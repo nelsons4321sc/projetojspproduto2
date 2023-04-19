@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.SingleConnection;
+import model.ModelLogin;
 import model.ModelProduto;
 
 public class DAOProdutoRepository {
@@ -311,9 +312,65 @@ public boolean existeProduto(String nomeproduto) throws Exception {
 	}
 
 
+public int totalPagina(Long userLogado) throws Exception {
+	
+	String sql ="select count(1) as total  from produto2 where usuario_pai_id = "+userLogado +" limit 15";
+	PreparedStatement statement = connection.prepareStatement(sql);
+	
+	ResultSet resultado = statement.executeQuery();
+	
+	resultado.next();
+	
+	Double cadastros = resultado.getDouble("total");
+	
+	Double porpagina = 15.0;
+	
+	Double pagina  = cadastros / porpagina;
+	
+	Double resto = pagina % 2;
+	
+		
+	if(resto > 0) {
+		pagina ++;
+	}
+	
+	return pagina.intValue();
+	
+	//return porpagina.intValue();
+}
+	
+	
+public List<ModelProduto> consultaProdutoListPaginada(Long userLogado, Integer offset) throws Exception {
+	
+	List<ModelProduto> retorno = new ArrayList<ModelProduto>();
+	
+	String sql ="select * from produto2 where usuario_pai_id = "+userLogado +" order by nome offset "+offset+" limit 15"; 
+	
+	PreparedStatement statement = connection.prepareStatement(sql);
+					
+	ResultSet rs = statement.executeQuery();
+	
+	while(rs.next()) {
+		
+		
+		
+		ModelProduto modelProduto = new ModelProduto();
+		
+		//String valor = Double.parseDouble(modelProduto.getValor()); 
+		
+		modelProduto.setIdproduto(rs.getLong("idproduto"));
+		modelProduto.setNomeproduto(rs.getString("nomeproduto"));
+		modelProduto.setFotoproduto(rs.getString("fotoproduto"));
+		modelProduto.setExtensaofotoproduto(rs.getString("extensaofotoproduto"));
+		modelProduto.setValor(rs.getDouble("valor"));
+		modelProduto.setUsuario_cad_id(daoUsuarioRepository.consultarUsuarioID(rs.getLong("usuario_cad_id")));
+		modelProduto.setUsuario_pai_id(daoUsuarioRepository.consultarUsuarioID(rs.getLong("usuario_pai_id")));
 
+		retorno.add(modelProduto);
+	}
 	
+	return retorno;
 	
-	
+}
 	
 }
