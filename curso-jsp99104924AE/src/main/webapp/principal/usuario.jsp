@@ -99,7 +99,9 @@
 															
 															
 															<div class="form-group form-default form-static-label">
-                                                                <input onblur="pesquisaCep();" type="text" name="cep" id="cep" class="form-control" required="required" autocomplete="off" value="${modelLogin.cep}">
+                                                                <input onblur="pesquisaCep();" type="text" name="cep" id="cep" 
+                                                                class="form-control" required="required" autocomplete="off" 
+                                                                value="${modelLogin.cep}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Cep</label>
                                                             </div>

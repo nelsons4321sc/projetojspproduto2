@@ -77,8 +77,9 @@
 														<td><img alt="Imagem produto" id="fotoembase64" src="${p.fotoproduto}" width="70px"></td>
 														<td><c:out value="R$ ${p.valor }"></c:out></td>
 														
-													<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletProdutoController?acao=editar&id=${p.idproduto}&userpai=${modelLogin.id}">Editar</a></td>											
-															</tr>
+														<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletProdutoController?acao=editar&id=${p.idproduto}&userpai=${modelLogin.id}">Editar</a></td>											
+														<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletProdutoController?acao=excluir&id=${p.idproduto}&userpai=${modelLogin.id}">Excluir</a></td>
+													</tr>
 												</c:forEach>
 											</tbody>
 										</table>

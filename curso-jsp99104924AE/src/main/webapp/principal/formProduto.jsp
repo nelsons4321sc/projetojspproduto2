@@ -112,10 +112,9 @@
 															<!--  value="${modelProduto.valor}"
 																  value="${modelProduto.nomeproduto}"	-->
 															<div align="center">
-															<c:if test="${modelLogin.id > 0}">
-															<a href="<%= request.getContextPath() %>/ServletUsuarioController?acao=buscarEditar&id=${modelLogin.id}" class="btn btn-primary btn-round waves-effect waves-light">Voltar</a>
-															</c:if>
+															
 															<button class="btn btn-success btn-round waves-effect waves-light">Salvar</button>
+															
 															</div>
 														</form>
 													</div>
@@ -127,35 +126,8 @@
 	
 	 
 											
+									
 											
-									<div style="height: 300px; overflow: scroll;">
-										<table class="table" id="tabelaresultadosview">
-											<thead>
-												<tr>
-													
-													<th scope="col">nome do Produto</th>
-													<th scope="col">Foto</th>
-													<!--  <th scope="col" id="valor">valor</th>-->
-													<th scope="col">valor</th>
-													<th scope="col">Excluir</th>
-													<th scope="col">Editar</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${modelProdutos}" var="p">
-													<tr>
-														<!-- parametro userpai informado como parametro na Servlet  -->
-														<td><c:out value="${p.nomeproduto }"></c:out></td>
-														<td><img alt="Imagem produto" id="fotoembase64" src="${p.fotoproduto}" width="70px"></td>
-														<td><c:out value="R$ ${p.valor }"></c:out></td>
-														
-														<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletProdutoController?acao=excluir&id=${p.idproduto}&userpai=${modelLogin.id}">Excluir</a></td>
-														<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletProdutoController?acao=editar&id=${p.idproduto}&userpai=${modelLogin.id}">Editar</a></td>											
-															</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>		
                                     </div>
                                     <!-- Page-body end -->
                                 </div>
@@ -169,6 +141,9 @@
     </div>
     <!-- Required Jquery -->
     <jsp:include page="javaScriptFile.jsp"></jsp:include>
+    
+    
+    
     
     <script type="text/javascript">
 	

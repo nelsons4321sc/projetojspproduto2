@@ -56,6 +56,14 @@
 																<label class="float-label">Código de Registro</label>
 															</div>
 															
+															<div class="form-group form-default  form-static-label ">
+																<input type="text" name="idproduto" id=idproduto class="form-control"
+																	readonly="readonly" value="${modelProduto.idproduto}"> <span
+																	class="form-bar"></span>  
+																
+																<label class="float-label">Produto ID</label>
+															</div>
+															
 															<div class="form-group form-default form-static-label">
 																<input readonly="readonly" type="text" name="nome" id="nome"
 																	class="form-control" required="required"
@@ -125,14 +133,14 @@
 												<c:forEach items="${modelProdutos}" var="p">
 													<tr>
 														<!-- parametro userpai informado como parametro na ServletTelefone  -->
-														<td><c:out value="${p.id }"></c:out></td>
+														<td><c:out value="${p.idproduto }"></c:out></td>
 														<td><c:out value="${p.nomeproduto }"></c:out></td>
 														<td>
 															<img alt="Imagem produto" id="fotoembase64" src="${p.fotoproduto}" width="70px">
 														</td>
 														<td><c:out value="R$ ${p.valor }"></c:out></td>
 														
-														<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletProdutoController?acao=excluir&id=${p.id}&userpai=${modelLogin.id}">Excluir</a></td>
+														<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletProdutoController?acao=excluir&id=${p.idproduto}&userpai=${modelLogin.id}">Excluir</a></td>
 													</tr>
 												</c:forEach>
 											</tbody>

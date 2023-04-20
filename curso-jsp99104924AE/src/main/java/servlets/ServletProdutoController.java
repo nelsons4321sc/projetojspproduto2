@@ -50,31 +50,7 @@ public class ServletProdutoController extends ServleGenericUtil {
 			modelLogin = daoUsuarioRepository.consultarUsuarioID(idUser);
 			
 			
-			if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("excluir")) {
-				
-				String id = request.getParameter("id");
-				
-				daoProdutoRepository.deleteProduto(Long.parseLong(id));
-				
-				//parametro registrado no botão excluir do produto.jsp
-				//String userpai = request.getParameter("userpai");
-				
-				//linha que preenche os campos após a exclusão
-				modelLogin = daoUsuarioRepository.consultarUsuarioID(Long.parseLong(id));
-				
-				//List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(Long.parseLong(id)); 
-				
-				List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(super.getUserLogado(request));
-				
-				request.setAttribute("modelProdutos", modelProdutos);
-				request.setAttribute("msg", "Produto excluído");
-				request.setAttribute("modelLogin", modelLogin);
-				request.getRequestDispatcher("principal/formProduto.jsp").forward(request, response);
-				
-				//para ser executado somente esse bloco, linha abaixo e não executar o outros ifs, executa o delete e para
-				return;
-					
-			} 
+			 
 			
 			if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("editar")) {
 				
@@ -134,7 +110,8 @@ public class ServletProdutoController extends ServleGenericUtil {
 			
 			 if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarTabProduto")) {	
 				
-				List<ModelProduto> modelProdutos = daoProdutoRepository.listTodosProduto(modelLogin.getId());
+				//List<ModelProduto> modelProdutos = daoProdutoRepository.listTodosProduto(modelLogin.getId());
+				 List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(super.getUserLogado(request));
 				
 				request.setAttribute("msg", "Produtos carregados");
 				request.setAttribute("modelProdutos", modelProdutos);
@@ -155,9 +132,47 @@ public class ServletProdutoController extends ServleGenericUtil {
 				 
 			 }	
 			 
+			 if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("deletarajax")) {
+					
+					String idProduto = request.getParameter("idProduto");
+					
+					daoProdutoRepository.deleteProduto(Long.parseLong(idProduto));
+					
+					response.getWriter().write("Exclusão feita com sucesso");
+					
+			}
+			 
+			 if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("excluir")) {
+					
+					String id = request.getParameter("id");
+					
+					daoProdutoRepository.deleteProduto(Long.parseLong(id));
+					
+					//parametro registrado no botão excluir do produto.jsp
+					//String userpai = request.getParameter("userpai");
+					
+					//linha que preenche os campos após a exclusão
+					modelLogin = daoUsuarioRepository.consultarUsuarioID(Long.parseLong(id));
+					
+					//List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(Long.parseLong(id)); 
+					
+					List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(super.getUserLogado(request));
+					
+					request.setAttribute("modelProdutos", modelProdutos);
+					request.setAttribute("msg", "Produto excluído");
+					request.setAttribute("modelLogin", modelLogin);
+					request.getRequestDispatcher("principal/formProduto.jsp").forward(request, response);
+					//request.getRequestDispatcher("principal/tabelaProduto.jsp").forward(request, response);
+					
+					//para ser executado somente esse bloco, linha abaixo e não executar o outros ifs, executa o delete e para
+					return;
+						
+				}
 			
-			String idUserA = Long.toString(idUser);
-			//String idUserA = request.getParameter(idLong);
+			 
+			
+			//String idUserA = Long.toString(idUser); RETIRADO 20/04/2023
+			String idUserA = request.getParameter("idUser");
 			
 			modelLogin = daoUsuarioRepository.consultarUsuarioID(Long.parseLong(idUserA));
 			
@@ -171,15 +186,19 @@ public class ServletProdutoController extends ServleGenericUtil {
 			
 			//ModelProduto2 modelProduto = daoProdutoRepository.consultarProdutoID(id); 
 			ModelProduto modelProduto = new ModelProduto();
-						modelLogin.setId(idUser);
-			List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(idUser);
+						//modelLogin.setId(idUser); RETIRADO 20/04/2023
+			
+			//List<ModelProduto> modelProdutos = daoProdutoRepository.listProduto(idUser); RETIRADO 20/04/2023
+			List<ModelProduto> modelProdutos = daoProdutoRepository.listTodosProduto(modelLogin.getId());
 			
 			request.setAttribute("msg", "Cadastro de Produto");
 			request.setAttribute("modelProdutos", modelProdutos);
 			request.setAttribute("modelProduto", modelProduto);
-			request.setAttribute("modelLogin", modelLogin.getId());
+			//request.setAttribute("modelLogin", modelLogin.getId());
+			request.setAttribute("modelLogin", modelLogin);
 			
-			//request.getRequestDispatcher("principal/formProduto.jsp").forward(request, response);
+			//request.getRequestDispatcher("principal/formProduto.jsp").forward(request, response);  RETIRADO 20/04/2023
+			request.getRequestDispatcher("principal/formProdutoBASE.jsp").forward(request, response);
 				
 		} 
 		
@@ -275,18 +294,18 @@ public class ServletProdutoController extends ServleGenericUtil {
 			} 
 			
 					
-			 if(daoProdutoRepository.existeProduto(modelProduto.getNomeproduto()) && modelProduto.getIdproduto() != null) {
-					msg = "Já existe um produto cadastrado com este nome, por favor, informe outro nome.";
+			 //if(daoProdutoRepository.existeProduto(modelProduto.getNomeproduto()) && modelProduto.getIdproduto() != null) {
+				//	msg = "Já existe um produto cadastrado com este nome, por favor, informe outro nome.";
 					
-				} else {
+			//	} else {
 					if(modelProduto.isNovo()) {
 						msg = "Produto gravado com sucesso";
 					} else {
 						msg = "Produto atualizado com sucesso";
 					}
 				 modelProduto =	daoProdutoRepository.gravarProduto(modelProduto);
-					daoProdutoRepository.gravarProduto(modelProduto);
-				}	
+					//daoProdutoRepository.gravarProduto(modelProduto);
+				//}	
 			
 			
 			
