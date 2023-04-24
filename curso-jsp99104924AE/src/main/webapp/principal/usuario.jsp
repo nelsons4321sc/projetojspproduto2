@@ -158,7 +158,7 @@
 																data-toggle="modal" data-target="#exampleModalUsuario">Pesquisar</button>-->
 															<c:if test="${modelLogin.id > 0}">
 															<a href="<%= request.getContextPath() %>/ServletTelefone?idUser=${modelLogin.id}" class="btn btn-primary btn-round waves-effect waves-light">Telefone</a>
-															<a href="<%= request.getContextPath() %>/ServletProdutoController?idUser=${modelLogin.id}" class="btn btn-primary btn-round waves-effect waves-light">Produto</a>
+															<a href="<%= request.getContextPath() %>/ServletProdutoController2?idUser=${modelLogin.id}" class="btn btn-primary btn-round waves-effect waves-light">Produto</a>
 															</c:if>
 															</div>					
 														</form>

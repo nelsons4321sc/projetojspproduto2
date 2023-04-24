@@ -44,7 +44,7 @@
 														<h3 >Cadastro de Produtos</h3>
 														</div>
 														<form class="form-material"  enctype="multipart/form-data" 
-															action="<%=request.getContextPath()%>/ServletProdutoController"
+															action="<%=request.getContextPath()%>/ServletProdutoController2"
 															method="post" id="formProduto">
 															
 															

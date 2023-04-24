@@ -198,7 +198,7 @@ public class ServletProdutoController extends ServleGenericUtil {
 			request.setAttribute("modelLogin", modelLogin);
 			
 			//request.getRequestDispatcher("principal/formProduto.jsp").forward(request, response);  RETIRADO 20/04/2023
-			request.getRequestDispatcher("principal/formProdutoBASE.jsp").forward(request, response);
+			request.getRequestDispatcher("principal/formProduto.jsp").forward(request, response);
 				
 		} 
 		
